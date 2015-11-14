@@ -1,0 +1,57 @@
+<idea-plugin version="2">
+  <id>jp.codic.plugins.intellij</id>
+  <name>Codic Plugin</name>
+  <version>1.0.2</version>
+  <vendor email="team@codic.jp" url="https://github.com/codic-project/codic-intellij-plugin">codic</vendor>
+
+  <description><![CDATA[
+      <a href="http://codic.jp" target="_blank">codic</a> plugin for the IntelliJ platform products<br>
+    This plugin automatically generates (translate Japanese to English) naming using codic API.<br>
+    ]]></description>
+
+  <change-notes><![CDATA[
+      <strong>1.0.2</strong><br>
+      - Display API error.<br>
+      <strong>1.0.1</strong><br>
+      - Support derived platform products.<br>
+      <strong>1.0</strong><br>
+      - First release.
+    ]]>
+  </change-notes>
+
+  <!-- please see http://confluence.jetbrains.com/display/IDEADEV/Build+Number+Ranges for description -->
+  <idea-version since-build="131"/>
+
+  <!-- please see http://confluence.jetbrains.com/display/IDEADEV/Plugin+Compatibility+with+IntelliJ+Platform+Products
+       on how to target different products -->
+  <depends>com.intellij.modules.lang</depends>
+
+  <extensions defaultExtensionNs="com.intellij">
+    <!-- Add your extensions here -->
+  </extensions>
+
+  <application-components>
+    <!-- Add your application components here -->
+      <component>
+          <implementation-class>jp.codic.plugins.intellij.CodicPluginApplicationComponent</implementation-class>
+      </component>
+  </application-components>
+
+
+  <project-components>
+    <!-- Add your project components here -->
+
+      <component>
+          <implementation-class>jp.codic.plugins.intellij.CodicPluginProjectComponent</implementation-class>
+      </component>
+  </project-components>
+
+  <actions>
+    <!-- Add your actions here -->
+      <action id="CodicPluginQuickLookAction" class="jp.codic.plugins.intellij.QuickLookAction" text="Codic: Quick look">
+          <add-to-group group-id="ToolsMenu" anchor="first"/>
+          <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl D"/>
+      </action>
+  </actions>
+
+</idea-plugin>
