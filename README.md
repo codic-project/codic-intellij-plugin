@@ -1,19 +1,19 @@
 # Codic Intellij IDEA Plugin
 IntelliJ IDEAとそのプラットフォーム製品 (PhpStorm, PyCharm, RubyMine, WebStorm)、[Codic](https://codic.jp) プラグインです。
 
-![codic plugin](https://raw.githubusercontent.com/codic-project/codic-intellij-plugin/master/screenshot1.png)
+![codic plugin](https://raw.githubusercontent.com/codic-project/codic-intellij-plugin/master/img/screenshot1.png)
 
 ### インストール
 1. インストールは公式レポジトリからインストールできます。
 メニューの "Preferences" >> "Plugins" から "Codic Plugin" で検索してインストールしてください。
 
-![codic plugin](https://raw.githubusercontent.com/codic-project/codic-intellij-plugin/master/screenshot2.png)
+![codic plugin](https://raw.githubusercontent.com/codic-project/codic-intellij-plugin/master/img/screenshot2.png)
 
 2. メニューの "Preferences" >> "Codic Plugin" でアクセストークンを設定します。アクセストークンは、
  [Codic](https://codic.jp)にログイン後、APIステータスのページより取得できます。
  
 
-![codic plugin](https://raw.githubusercontent.com/codic-project/codic-intellij-plugin/master/screenshot3.png)
+![codic plugin](https://raw.githubusercontent.com/codic-project/codic-intellij-plugin/master/img/screenshot3.png)
 
 ### 使い方
 
