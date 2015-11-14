@@ -1,16 +1,24 @@
 # Codic Intellij IDEA Plugin
-IntelliJ IDEAとそのプラットフォーム製品向け、[Codic](https://codic.jp) プラグインです。
-RubyMine, PHP Storm
+IntelliJ IDEAとそのプラットフォーム製品 (PhpStorm, PyCharm, RubyMine, WebStorm)、[Codic](https://codic.jp) プラグインです。
 
-------------
+![codic plugin](https://raw.githubusercontent.com/codic-project/codic-intellij-plugin/master/screenshot1.png)
+
 ### インストール
 1. インストールは公式レポジトリからインストールできます。
-プリファレンス >> Pluginsから "Codic Plugin" で検索してインストールしてください。
+メニューの "Preferences" >> "Plugins" から "Codic Plugin" で検索してインストールしてください。
 
-2.
+![codic plugin](https://raw.githubusercontent.com/codic-project/codic-intellij-plugin/master/screenshot2.png)
+
+2. メニューの "Preferences" >> "Codic Plugin" でアクセストークンを設定します。アクセストークンは、
+ [Codic](https://codic.jp)にログイン後、APIステータスのページより取得できます。
+ 
+
+![codic plugin](https://raw.githubusercontent.com/codic-project/codic-intellij-plugin/master/screenshot3.png)
 
 ### 使い方
 
+エディタ上で、<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>D</kbd> でネーミング生成するためのポップアップを開きます。
+テキストを選択状態で開くと、ダイレクト生成できます。
 
 ### 注意事項
 
