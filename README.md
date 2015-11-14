@@ -27,4 +27,4 @@ IntelliJ IDEAとそのプラットフォーム製品 (PhpStorm, PyCharm, RubyMin
 
 ### その他
 
-バグ・要望などがありましたら、Issueへ登録してください。
+バグ・要望などがありましたら、[Issue](https://github.com/codic-project/codic-intellij-plugin/issues)へ登録してください。
