@@ -3,7 +3,7 @@ IntelliJ IDEAとそのプラットフォーム製品 (PhpStorm, PyCharm, RubyMin
 
 ![codic plugin](https://raw.githubusercontent.com/codic-project/codic-intellij-plugin/master/img/screenshot1.png)
 
-### インストール
+### Install
 1. インストールは公式レポジトリからインストールできます。
  メニューの "Preferences" >> "Plugins" から "Codic Plugin" で検索してインストールしてください。
 
@@ -14,20 +14,18 @@ IntelliJ IDEAとそのプラットフォーム製品 (PhpStorm, PyCharm, RubyMin
  
  ![codic plugin](https://raw.githubusercontent.com/codic-project/codic-intellij-plugin/master/img/screenshot3.png)
 
-### 使い方
+### How to use
 
 エディタ上で、<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>D</kbd> でネーミング生成するためのポップアップを開きます。
 テキストを選択状態で開くと、ダイレクト生成できます。
 
-### 注意事項
-
-このプラグインは、codic APIを使っているため、一定時間内のアクセス回数に制限があります。
+※ このプラグインは、codic APIを使っているため、一定時間内のアクセス回数に制限があります。
 制限を超えたら、APIステータスのページでリセットしてください。
 
-## 既知の問題
+## Known issue
 
 IntelliJのEditor popupが持つ既知の問題に起因して、Macことえりではポップアップ上でIME変換ができない現象があります。これについては、Issueを作成し調査しますが、問題が解決するまではテキスト選択+<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>D</kbd>で生成するようにしてください。
 
-### その他
+### Bug report
 
 バグ・要望などがありましたら、[Issue](https://github.com/codic-project/codic-intellij-plugin/issues)へ登録してください。
