@@ -123,7 +123,7 @@ public class CodicAPI {
             //System.out.println("Request : " + url);
             conn = new URL(url).openConnection();
             conn.setRequestProperty("Accept", "*/*");
-            conn.setRequestProperty("User-Agent", "Codic intellij plugin/1.0");
+            conn.setRequestProperty("User-Agent", "Codic IntelliJ Plugin/1.0");
             conn.setRequestProperty("Pragma", "no-cache");
             conn.setRequestProperty("Authorization", "Bearer " + accessToken);
             conn.setConnectTimeout(1000);
