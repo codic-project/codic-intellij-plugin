@@ -1,5 +1,5 @@
 # Codic Intellij IDEA Plugin
-IntelliJ IDEAとそのプラットフォーム製品 (PhpStorm, PyCharm, RubyMine, WebStorm)、[Codic](https://codic.jp) プラグインです。
+IntelliJ IDEAとそのプラットフォーム製品 (PhpStorm, PyCharm, RubyMine, WebStorm, ...)、[Codic](https://codic.jp) プラグインです。
 
 ![codic plugin](https://raw.githubusercontent.com/codic-project/codic-intellij-plugin/master/img/screenshot1.png)
 
