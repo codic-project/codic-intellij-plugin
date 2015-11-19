@@ -1,7 +1,7 @@
 <idea-plugin version="2">
   <id>jp.codic.plugins.intellij</id>
   <name>Codic Plugin</name>
-  <version>1.0.2</version>
+  <version>1.0.3</version>
   <vendor email="team@codic.jp" url="https://github.com/codic-project/codic-intellij-plugin">codic</vendor>
 
   <description><![CDATA[
@@ -10,6 +10,8 @@
     ]]></description>
 
   <change-notes><![CDATA[
+      <strong>1.0.3</strong><br>
+      - Fix bug #2.<br>
       <strong>1.0.2</strong><br>
       - Display API error.<br>
       <strong>1.0.1</strong><br>

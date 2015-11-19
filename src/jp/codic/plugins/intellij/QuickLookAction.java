@@ -58,24 +58,26 @@ public class QuickLookAction extends AnAction {
 
     private JBPopup showPopup(final Editor editor) {
         if (form == null) {
-            form = new QuickLookForm(editor.getProject(), new QuickLookForm.SelectionListener() {
-                @Override
-                public void select(final String text) {
-                    CommandProcessor.getInstance().executeCommand(editor.getProject(), new Runnable() {
-                        public void run() {
-                            ApplicationManager.getApplication().runWriteAction(new Runnable() {
-                                public void run() {
-                                    EditorModificationUtil.deleteSelectedText(editor);
-                                    EditorModificationUtil.insertStringAtCaret(editor, text);
-                                    popup.dispose();
-                                    popup = null;
-                                }
-                            });
-                        }
-                    }, IdeBundle.message("command.pasting.reference"), null);
-                }
-            });
+            form = new QuickLookForm(editor.getProject());
         }
+
+        form.setSelectionListener(new QuickLookForm.SelectionListener() {
+            @Override
+            public void select(final String text) {
+                CommandProcessor.getInstance().executeCommand(editor.getProject(), new Runnable() {
+                    public void run() {
+                        ApplicationManager.getApplication().runWriteAction(new Runnable() {
+                            public void run() {
+                                EditorModificationUtil.deleteSelectedText(editor);
+                                EditorModificationUtil.insertStringAtCaret(editor, text);
+                                popup.dispose();
+                                popup = null;
+                            }
+                        });
+                    }
+                }, IdeBundle.message("command.pasting.reference"), null);
+            }
+        });
 
         PopupFactoryImpl popupFactory = new PopupFactoryImpl();
         ComponentPopupBuilder builder = popupFactory.createComponentPopupBuilder(
@@ -98,13 +100,6 @@ public class QuickLookAction extends AnAction {
 //        } catch (AWTException e) {
 //        }
 
-        //FocusManager.getCurrentManager().setGlobalCurrentFocusCycleRoot(popup.getContent().getParent());
-        //FocusManager.getCurrentManager().downFocusCycle();
-//        popup.getContent().requestFocus(true);
-//        popup.getContent().requestFocus();
-//        popup.getContent().grabFocus();
-        //form.getPreferredControl().
-        //popup.getContent().enableInputMethods(true);
 
         return popup;
     }

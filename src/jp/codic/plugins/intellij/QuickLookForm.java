@@ -47,10 +47,8 @@ public class QuickLookForm {
     /**
      * A constructor.
      */
-    public QuickLookForm(Project project, SelectionListener listener_) {
+    public QuickLookForm(Project project) {
 
-        //editor = project_;
-        listener = listener_;
         debouncer = new Debouncer(DELAY_FOR_KEY_EVENT);
         component = project.getComponent(CodicPluginProjectComponent.class);
 
@@ -120,6 +118,10 @@ public class QuickLookForm {
 
     }
 
+    public void setSelectionListener(SelectionListener listener) {
+        this.listener = listener;
+    }
+
     public void beforeShow(String fileType, String text) {
         this.queryTextField.setText(text);
         this.candidatesListModel.removeAllElements();
@@ -143,7 +145,7 @@ public class QuickLookForm {
 
     public void applySelection() {
         String selected = this.getSelected();
-        if (selected != null) {
+        if (selected != null && listener != null) {
             listener.select(selected);
         }
     }
