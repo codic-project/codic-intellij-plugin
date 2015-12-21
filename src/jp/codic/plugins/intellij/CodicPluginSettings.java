@@ -2,6 +2,7 @@ package jp.codic.plugins.intellij;
 
 import com.intellij.openapi.diagnostic.Logger;
 
+import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,6 +12,8 @@ public class CodicPluginSettings {
     private String accessToken = "";
     private Long projectId;
     private String letterCaseConvention = "";
+    private Integer quickLookHeight = 150;
+    private Integer quickLookWidth = 300;
     private Map<String, String> letterCaseConventionIndex = null;
 
     public CodicPluginSettings() {
@@ -73,4 +76,31 @@ public class CodicPluginSettings {
         }
     }
 
+    public Integer getQuickLookHeight() {
+        return quickLookHeight;
+    }
+
+    public void setQuickLookHeight(Integer quickLookHeight) {
+        this.quickLookHeight = quickLookHeight;
+    }
+
+    public Integer getQuickLookWidth() {
+        return quickLookWidth;
+    }
+
+    public void setQuickLookWidth(Integer quickLookWidth) {
+        this.quickLookWidth = quickLookWidth;
+    }
+
+
+    public void updateQuickLookSize(Dimension quickLookSize) {
+        quickLookWidth = new Double(quickLookSize.getWidth()).intValue();
+        quickLookHeight = new Double(quickLookSize.getHeight()).intValue();
+    }
+
+    public Dimension quickLookSize() {
+        if (quickLookWidth == -1 || quickLookHeight == -1)
+            return null;
+        return new Dimension(quickLookWidth, quickLookHeight);
+    }
 }

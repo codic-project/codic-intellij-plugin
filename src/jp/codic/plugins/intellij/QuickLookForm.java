@@ -111,6 +111,8 @@ public class QuickLookForm {
             }
         });
 
+        queryTextField.putClientProperty("JTextField.variant", "search");
+
 
         // Init status message.
         //statusTextField.setFont(increaseFontSize(statusTextField.getFont(), -1));

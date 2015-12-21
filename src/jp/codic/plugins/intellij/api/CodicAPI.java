@@ -117,10 +117,6 @@ public class CodicAPI {
         initProxy();
 
         try {
-            long stime = System.currentTimeMillis();
-            System.out.println("Request : " + System.currentTimeMillis());
-
-            //System.out.println("Request : " + url);
             conn = new URL(url).openConnection();
             conn.setRequestProperty("Accept", "*/*");
             conn.setRequestProperty("User-Agent", "Codic IntelliJ Plugin/1.0");
@@ -130,8 +126,6 @@ public class CodicAPI {
             conn.setReadTimeout(2000);
             is = conn.getInputStream();
             String rawJSON = getResponseString(is);
-
-            System.out.println("Response : " + System.currentTimeMillis());
 
             return new JSONArray(rawJSON);
         } catch (IOException e) {

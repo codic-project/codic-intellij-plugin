@@ -22,9 +22,6 @@ IntelliJ IDEAとそのプラットフォーム製品 (PhpStorm, PyCharm, RubyMin
 ※ このプラグインは、codic APIを使っているため、一定時間内のアクセス回数に制限があります。
 制限を超えたら、APIステータスのページでリセットしてください。
 
-## Known issue
-
-IntelliJのEditor popupが持つ既知の問題に起因して、Macことえりではポップアップ上でIME変換ができない現象があります。これについては、Issueを作成し調査しますが、問題が解決するまではテキスト選択+<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>D</kbd>で生成するようにしてください。
 
 ### Bug report
 
