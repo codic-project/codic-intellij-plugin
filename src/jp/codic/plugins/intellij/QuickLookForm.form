@@ -26,16 +26,6 @@
           <text value="     "/>
         </properties>
       </component>
-      <component id="34b05" class="javax.swing.JList" binding="candidatesList">
-        <constraints>
-          <grid row="2" column="0" row-span="1" col-span="2" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="50"/>
-          </grid>
-        </constraints>
-        <properties>
-          <selectionMode value="0"/>
-        </properties>
-      </component>
       <grid id="c96f5" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="3" left="3" bottom="5" right="3"/>
         <constraints>
@@ -76,6 +66,21 @@
           </component>
         </children>
       </grid>
+      <scrollpane id="507f">
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="2" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties/>
+        <border type="empty"/>
+        <children>
+          <component id="34b05" class="javax.swing.JList" binding="candidatesList">
+            <constraints/>
+            <properties>
+              <selectionMode value="0"/>
+            </properties>
+          </component>
+        </children>
+      </scrollpane>
     </children>
   </grid>
 </form>

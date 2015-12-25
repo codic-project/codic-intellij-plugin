@@ -170,7 +170,5 @@ public class QuickLookAction extends AnAction {
             SwingUtilities.convertPointToScreen(point, mouse.getComponent());
             return (new Rectangle(this.popup.getLocationOnScreen(), this.popup.getSize())).contains(point);
         }
-
     }
-
 }

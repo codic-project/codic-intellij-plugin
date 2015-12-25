@@ -1,7 +1,7 @@
 <idea-plugin version="2">
   <id>jp.codic.plugins.intellij</id>
   <name>Codic Plugin</name>
-  <version>1.0.4</version>
+  <version>1.0.5</version>
   <vendor email="team@codic.jp" url="https://github.com/codic-project/codic-intellij-plugin">codic</vendor>
 
   <description><![CDATA[
@@ -10,15 +10,22 @@
     ]]></description>
 
   <change-notes><![CDATA[
+      <strong>1.0.5</strong><br>
+      - Fix bug #6 : Add vertical scrollbar in quick-look.<br>
+
       <strong>1.0.4</strong><br>
       - Redesign the quick-look popup.<br>
-      - Fix bug #1 (IME dose not work in the quick-look).<br>
+      - Fix bug #1 : IME dose not work in the quick-look.<br>
+
       <strong>1.0.3</strong><br>
       - Fix bug #2.<br>
+
       <strong>1.0.2</strong><br>
       - Display API error.<br>
+
       <strong>1.0.1</strong><br>
       - Support derived platform products.<br>
+
       <strong>1.0</strong><br>
       - First release.
     ]]>
