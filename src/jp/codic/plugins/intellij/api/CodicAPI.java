@@ -65,7 +65,7 @@ public class CodicAPI {
      */
     public static Translation[] translate(String accessToken, Long projectId, String query, String letterCase)
             throws APIException {
-        String url = HOST + "/v1/engine/translate.json";
+        String url = HOST + "/v1.1/engine/translate.json";
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("project_id", projectId);
         params.put("text", query);
@@ -78,7 +78,8 @@ public class CodicAPI {
             for (int i = 0; i < json.length(); i++) {
                 entries[i] = new Translation();
                 entries[i].translatedText = json.getJSONObject(i).getString("translated_text");
-                entries[i].words = mapWord(json.getJSONObject(i).getJSONArray("words"));
+                entries[i].translatedTextInCasing = json.getJSONObject(i).getString("translated_text_in_casing");
+                entries[i].words = mapWords(json.getJSONObject(i).getJSONArray("words"));
                 break;
             }
             return entries;
@@ -244,7 +245,7 @@ public class CodicAPI {
         return null;
     }
 
-    private static Word[] mapWord(JSONArray jsonArray) throws JSONException {
+    private static Word[] mapWords(JSONArray jsonArray) throws JSONException {
         Word[] words = new Word[jsonArray.length()];
         for (int i = 0; i < jsonArray.length(); i++) {
             words[i] = new Word();
@@ -259,6 +260,7 @@ public class CodicAPI {
         for (int i = 0; i < jsonArray.length(); i++) {
             words[i] = new Candidate();
             words[i].text = jsonArray.getJSONObject(i).getString("text");
+            words[i].textInCasing = jsonArray.getJSONObject(i).getString("text_in_casing");
         }
         return words;
     }

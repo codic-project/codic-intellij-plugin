@@ -39,7 +39,6 @@ public class QuickLookForm {
     private JTextField queryTextField;
     private JLabel statusTextField;
     private Debouncer debouncer ;
-    //private Editor editor;
     private SelectionListener listener;
     private CodicPluginProjectComponent component;
     private String activeFileType;
@@ -64,6 +63,7 @@ public class QuickLookForm {
                 if (keyEvent.getKeyCode() ==  38 ||
                         keyEvent.getKeyCode() ==  40) {
                     requestFocusAnItem(keyEvent.getKeyCode() == 38);
+                    keyEvent.consume(); // Prevent default behavior.
                 }
                 if (keyEvent.getKeyCode() ==  10) {  // Enter
                     applySelection();
@@ -112,12 +112,6 @@ public class QuickLookForm {
         });
 
         queryTextField.putClientProperty("JTextField.variant", "search");
-
-
-        // Init status message.
-        //statusTextField.setFont(increaseFontSize(statusTextField.getFont(), -1));
-        //statusTextField.setBorder(new EmptyBorder(3, 3, 3, 3));
-
     }
 
     public void setSelectionListener(SelectionListener listener) {
@@ -186,13 +180,17 @@ public class QuickLookForm {
 
     private void requestFocusAnItem(boolean reverse) {
         int index = this.candidatesList.getSelectedIndex();
-        if (index == -1) {
-            if (this.candidatesList.getModel().getSize() > 0) {
-                this.candidatesList.setSelectedIndex(reverse ?
-                        this.candidatesList.getModel().getSize() - 1 : 0);
+        int size = this.candidatesList.getModel().getSize();
+        if (size > 0) {
+            index += (reverse ? -1 : 1);
+            if (index < 0) {
+                index = size - 1;
+            } else if (index > size - 1) {
+                index = 0;
             }
+            System.out.println(">" + index);
+            this.candidatesList.setSelectedIndex(index);
         }
-        this.candidatesList.requestFocus();
     }
 
     private Font increaseFontSize(Font baseFont, int delta) {
@@ -317,10 +315,10 @@ public class QuickLookForm {
             if (translations.length > 0) {
                 if (translations[0].words.length == 1 && translations[0].words[0].successful) {
                     for (Candidate candidate : translations[0].words[0].candidates) {
-                        candidatesListModel.addElement(candidate.text);
+                        candidatesListModel.addElement(candidate.textInCasing);
                     }
                 } else {
-                    candidatesListModel.addElement(translations[0].translatedText);
+                    candidatesListModel.addElement(translations[0].translatedTextInCasing);
                 }
             }
         }

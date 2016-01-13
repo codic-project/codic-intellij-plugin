@@ -22,6 +22,20 @@ IntelliJ IDEAとそのプラットフォーム製品 (PhpStorm, PyCharm, RubyMin
 ※ このプラグインは、codic APIを使っているため、一定時間内のアクセス回数に制限があります。
 制限を超えたら、APIステータスのページでリセットしてください。
 
+### Change log
+
+
+_1.0.6_
+- API v1.1 をサポート.
+- ダイアログ上でのキーハンドリングを強化
+
+_1.0.5_
+- バグ修正 #6 : Add vertical scrollbar in quick-look.
+
+_1.0.4_
+- Redesign the quick-look popup.
+- バグ修正 #1 : IME dose not work in the quick-look.
+      
 
 ### Bug report
 
