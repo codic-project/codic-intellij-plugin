@@ -1,15 +1,20 @@
 <idea-plugin version="2">
-  <id>jp.codic.plugins.intellij</id>
-  <name>Codic Plugin</name>
-  <version>1.0.6</version>
-  <vendor email="team@codic.jp" url="https://github.com/codic-project/codic-intellij-plugin">codic</vendor>
+    <id>jp.codic.plugins.intellij</id>
+    <name>Codic Plugin</name>
 
-  <description><![CDATA[
+    <!-- ** Also change CodicPlugin#VERSION ** -->
+    <version>1.0.7</version>
+    <vendor email="team@codic.jp" url="https://github.com/codic-project/codic-intellij-plugin">codic</vendor>
+
+    <description><![CDATA[
       <a href="http://codic.jp" target="_blank">codic</a> plugin for the IntelliJ platform products<br>
     This plugin automatically generates (translate Japanese to English) naming using codic API.<br>
     ]]></description>
 
-  <change-notes><![CDATA[
+    <change-notes><![CDATA[
+      <strong>1.0.7</strong><br>
+      - Add shortcut key for letter casing combo-box (Ctrl+Shift+D).<br>
+
       <strong>1.0.6</strong><br>
       - Support v1.1 API.<br>
       - Enhance key handing in quick look.<br>

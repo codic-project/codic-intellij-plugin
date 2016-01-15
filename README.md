@@ -25,6 +25,9 @@ IntelliJ IDEAとそのプラットフォーム製品 (PhpStorm, PyCharm, RubyMin
 ### Change log
 
 
+_1.0.7_
+- ケース変換選択のショートカットを追加（<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>D</kbd>をリタイプ）
+
 _1.0.6_
 - API v1.1 をサポート.
 - ダイアログ上でのキーハンドリングを強化

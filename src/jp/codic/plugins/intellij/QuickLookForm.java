@@ -3,13 +3,11 @@ package jp.codic.plugins.intellij;
 import com.intellij.notification.Notification;
 import com.intellij.notification.NotificationType;
 import com.intellij.notification.Notifications;
-import com.intellij.openapi.components.ComponentManager;
-import com.intellij.openapi.components.ComponentManagerConfig;
-import com.intellij.openapi.components.impl.ComponentManagerImpl;
-import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.fileEditor.FileDocumentManager;
+import com.intellij.openapi.actionSystem.KeyboardShortcut;
+import com.intellij.openapi.actionSystem.Shortcut;
+import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.keymap.KeymapManager;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.ListCellRendererWrapper;
 import com.intellij.util.ui.UIUtil;
 import jp.codic.plugins.intellij.api.*;
@@ -22,26 +20,26 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 
 
 public class QuickLookForm {
 
     private static final long DELAY_FOR_KEY_EVENT = 200;
+    private static final String QUICK_LOOK_ACTION_ID = "CodicPluginQuickLookAction";
+    private final Logger LOG = Logger.getInstance("#" + getClass().getCanonicalName());
 
     private JPanel rootPanel;
     private JList candidatesList;
     private DefaultListModel candidatesListModel;
     private JComboBox letterCaseComboBox;
     private JTextField queryTextField;
-    private JLabel statusTextField;
+    private JLabel statusLabel;
     private Debouncer debouncer ;
     private SelectionListener listener;
     private CodicPluginProjectComponent component;
     private String activeFileType;
+
 
     /**
      * A constructor.
@@ -62,7 +60,7 @@ public class QuickLookForm {
             @Override public void keyPressed(KeyEvent keyEvent) {
                 if (keyEvent.getKeyCode() ==  38 ||
                         keyEvent.getKeyCode() ==  40) {
-                    requestFocusAnItem(keyEvent.getKeyCode() == 38);
+                    scrollCandidatesList(keyEvent.getKeyCode() == 38);
                     keyEvent.consume(); // Prevent default behavior.
                 }
                 if (keyEvent.getKeyCode() ==  10) {  // Enter
@@ -83,11 +81,15 @@ public class QuickLookForm {
                     setText(((LetterCase) value).shortName);
             }
         });
-        letterCaseComboBox.addActionListener (new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                updateSearch();
-                component.getState().addLetterCaseConvention(activeFileType,
-                        ((LetterCase)letterCaseComboBox.getSelectedItem()).id);
+        letterCaseComboBox.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent event) {
+                if (event.getStateChange() == ItemEvent.SELECTED) {
+                    //Object item = event.getItem();
+                    updateSearch();
+                    component.getState().addLetterCaseConvention(activeFileType,
+                            ((LetterCase)letterCaseComboBox.getSelectedItem()).id);
+                }
             }
         });
 
@@ -112,6 +114,35 @@ public class QuickLookForm {
         });
 
         queryTextField.putClientProperty("JTextField.variant", "search");
+
+        // Broken char ...
+//        statusLabel.setText("Press " + getKeyStrokeLabel(
+//                getShortcut(QUICK_LOOK_ACTION_ID)) + " : Change letter case.");
+    }
+
+    private KeyStroke getShortcut(String actionCodeCompletion) {
+        final Shortcut[] shortcuts = KeymapManager.getInstance().getActiveKeymap().getShortcuts(actionCodeCompletion);
+        for (final Shortcut shortcut : shortcuts) {
+            if (shortcut instanceof KeyboardShortcut) {
+                return ((KeyboardShortcut)shortcut).getFirstKeyStroke();
+            }
+        }
+        return null;
+    }
+
+    private String getKeyStrokeLabel(KeyStroke myKeyStroke) {
+        StringBuilder sb = new StringBuilder();
+        if ((myKeyStroke.getModifiers() & KeyEvent.CTRL_MASK) > 0) {
+            sb.append("Ctrl + ");
+        }
+        if ((myKeyStroke.getModifiers() & KeyEvent.SHIFT_MASK) > 0) {
+            sb.append("Shift + ");
+        }
+        if ((myKeyStroke.getModifiers() & KeyEvent.META_MASK) > 0) {
+            sb.append("Meta + ");
+        }
+        sb.append(myKeyStroke.getKeyChar());
+        return sb.toString();
     }
 
     public void setSelectionListener(SelectionListener listener) {
@@ -131,13 +162,6 @@ public class QuickLookForm {
         }
 
     }
-
-
-//    private String getFileTypeName() {
-//        VirtualFile virtualFile = FileDocumentManager.getInstance().getFile(editor.getDocument());
-//        return virtualFile.getFileType().getName();
-//    }
-
 
     public void applySelection() {
         String selected = this.getSelected();
@@ -162,6 +186,8 @@ public class QuickLookForm {
         return this.queryTextField;
     }
 
+    // Private methods -------
+
     private void updateSearch() {
         CodicPluginSettings settings = component.getState();
         debouncer.push(new SearchTask(settings, queryTextField.getText(),
@@ -173,12 +199,12 @@ public class QuickLookForm {
                 new CandidatesListUpdater(translations));
     }
 
-    private void updateStatusMessage(String message) {
+    private void setStatusLabelAsync(String message) {
         UIUtil.invokeLaterIfNeeded(
                 new StatusUpdater(true, message));
     }
 
-    private void requestFocusAnItem(boolean reverse) {
+    private void scrollCandidatesList(boolean reverse) {
         int index = this.candidatesList.getSelectedIndex();
         int size = this.candidatesList.getModel().getSize();
         if (size > 0) {
@@ -197,16 +223,18 @@ public class QuickLookForm {
         return new Font(baseFont.getName(), baseFont.getStyle(), baseFont.getSize() + delta);
     }
 
+    private void createUIComponents() {
+        this.queryTextField = new MyTextField(getShortcut(QUICK_LOOK_ACTION_ID));
+    }
+
     private class SearchTask implements Runnable {
         private CodicPluginSettings settings;
         private String text;
         private String letterCase;
-        //private Project project;
 
         private SearchTask(CodicPluginSettings settings, String text, String letterCase) {
             this.settings = settings;
             this.text = text;
-            //this.project = project;
             this.letterCase = letterCase;
         }
 
@@ -217,8 +245,6 @@ public class QuickLookForm {
                 return;
             }
 
-            CodicPluginSettings settings = component.getState();
-
             try {
                 Translation[] translations = CodicAPI.translate(this.settings.getAccessToken(),
                         this.settings.getProjectId(), this.text, this.letterCase);
@@ -227,8 +253,6 @@ public class QuickLookForm {
 
             } catch (APIException e) {
                 updateResultList(new Translation[0]);
-                //updateStatusMessage(e.getMessage());
-
                 Notifications.Bus.notify(
                     new Notification("CodicPlugin", "Codic Plugin Error", e.getMessage(), NotificationType.WARNING)
                 );
@@ -237,7 +261,17 @@ public class QuickLookForm {
         }
     }
 
-
+    private void scrollLetterCaseComboBox() {
+        int index = letterCaseComboBox.getSelectedIndex();
+        int size = letterCaseComboBox.getModel().getSize();
+        if (size > 0) {
+            index++;
+            if (index > size - 1) {
+                index = 0;
+            }
+            letterCaseComboBox.setSelectedIndex(index); // Fire event selection change.
+        }
+    }
 
 
     private static class LetterCase {
@@ -287,6 +321,7 @@ public class QuickLookForm {
         abstract public void changed(DocumentEvent documentEvent);
     }
 
+
     private class StatusUpdater implements Runnable {
         private boolean status;
         private String message;
@@ -298,7 +333,7 @@ public class QuickLookForm {
 
         @Override
         public void run() {
-            statusTextField.setText(message);
+            statusLabel.setText(message);
         }
     }
 
@@ -329,4 +364,29 @@ public class QuickLookForm {
         public void select(String text);
     }
 
+
+    public class MyTextField extends JTextField {
+
+        private final Logger LOG = Logger.getInstance("#" + getClass().getCanonicalName());
+        private KeyStroke myKeyStroke;
+
+        public MyTextField(KeyStroke keyStroke) {
+            super();
+            myKeyStroke = keyStroke;
+        }
+
+        @Override
+        protected void processKeyEvent(KeyEvent keyEvent) {
+            KeyStroke keyStroke = KeyStroke.getKeyStrokeForEvent(keyEvent);
+
+            if (myKeyStroke != null && (myKeyStroke.getKeyCode() == keyStroke.getKeyCode() &&
+                    myKeyStroke.getModifiers() == keyStroke.getModifiers())) {
+                keyEvent.consume();
+                scrollLetterCaseComboBox();
+                return;
+            }
+
+            super.processKeyEvent(keyEvent);
+        }
+    }
 }
