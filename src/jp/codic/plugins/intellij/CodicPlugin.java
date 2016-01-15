@@ -9,6 +9,8 @@ import java.util.ResourceBundle;
 
 public class CodicPlugin {
 
+    private static final String VERSION = "1.0.7";
+
     private static ResourceBundle resource;
 
     public static String getString(String key) {
@@ -18,4 +20,7 @@ public class CodicPlugin {
         return resource.getString(key);
     }
 
+    public static String getVersion() {
+        return VERSION;
+    }
 }

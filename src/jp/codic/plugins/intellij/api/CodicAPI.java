@@ -3,6 +3,7 @@ package jp.codic.plugins.intellij.api;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.util.net.HttpConfigurable;
+import jp.codic.plugins.intellij.CodicPlugin;
 import jp.codic.plugins.intellij.json.JSONArray;
 import jp.codic.plugins.intellij.json.JSONException;
 import jp.codic.plugins.intellij.json.JSONObject;
@@ -22,7 +23,6 @@ public class CodicAPI {
 
     /**
      * /v1/user_projects.json
-     *
      * @throws APIException
      */
     public static UserProject[] getUserProjects(String accessToken) throws APIException {
@@ -120,7 +120,7 @@ public class CodicAPI {
         try {
             conn = new URL(url).openConnection();
             conn.setRequestProperty("Accept", "*/*");
-            conn.setRequestProperty("User-Agent", "Codic IntelliJ Plugin/1.0");
+            conn.setRequestProperty("User-Agent", "Codic IntelliJ Plugin/" + CodicPlugin.getVersion());
             conn.setRequestProperty("Pragma", "no-cache");
             conn.setRequestProperty("Authorization", "Bearer " + accessToken);
             conn.setConnectTimeout(1000);
@@ -184,8 +184,8 @@ public class CodicAPI {
     }
 
     /**
-     * @param params
-     * @return
+     * @param params Query parameters.
+     * @return Query string.
      */
     private static String buildQueryString(Map<String, Object> params) {
         String query = "";
@@ -203,7 +203,7 @@ public class CodicAPI {
 
     /**
      * @param is The input stream.
-     * @return
+     * @return Response as string.
      * @throws IOException
      */
     private static String getResponseString(InputStream is) throws IOException {
@@ -233,8 +233,8 @@ public class CodicAPI {
     }
 
     /**
-     * @param value
-     * @return
+     * @param value Input source.
+     * @return URL-encoded string.
      */
     private static String encodeUTF8(String value) {
         try {
