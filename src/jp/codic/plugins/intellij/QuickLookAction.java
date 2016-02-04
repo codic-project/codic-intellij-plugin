@@ -18,9 +18,9 @@ import com.intellij.openapi.ui.popup.ComponentPopupBuilder;
 import com.intellij.openapi.ui.popup.JBPopup;
 import com.intellij.openapi.ui.popup.JBPopupListener;
 import com.intellij.openapi.ui.popup.LightweightWindowEvent;
-import com.intellij.openapi.util.Key;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.popup.PopupFactoryImpl;
+import jp.codic.plugins.intellij.api.APIException;
 
 import javax.swing.*;
 import java.awt.*;
@@ -73,9 +73,9 @@ public class QuickLookAction extends AnAction {
             form = new QuickLookForm(editor.getProject());
         }
 
-        form.setSelectionListener(new QuickLookForm.SelectionListener() {
+        form.setSelectionListener(new QuickLookForm.EventListener() {
             @Override
-            public void select(final String text) {
+            public void selected(final String text) {
                 CommandProcessor.getInstance().executeCommand(editor.getProject(), new Runnable() {
                     public void run() {
                         ApplicationManager.getApplication().runWriteAction(new Runnable() {
@@ -88,6 +88,18 @@ public class QuickLookAction extends AnAction {
                         });
                     }
                 }, IdeBundle.message("command.pasting.reference"), null);
+            }
+
+            @Override
+            public void failed(APIException e) {
+                String message = e.getMessage();
+                if (e.getCode() == 429) {   // Rate limit exceeded.
+                    message = CodicPlugin.getString("messages.api_rate_limit_exceeded");
+                }
+                Notifications.Bus.notify(
+                    new Notification("CodicPlugin", "Codic Plugin Error", message, NotificationType.WARNING),
+                    project
+                );
             }
         });
 

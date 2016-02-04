@@ -71,7 +71,7 @@ public class CodicAPI {
         params.put("text", query);
         params.put("casing", letterCase);
         // params.put("count", 20);
-
+if (1==1) throw new APIException("test", 429);
         try {
             JSONArray json = execHttpGetJsonArray(accessToken, url + "?" + buildQueryString(params));
             Translation[] entries = new Translation[json.length()];

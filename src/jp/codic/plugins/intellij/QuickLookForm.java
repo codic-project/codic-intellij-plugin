@@ -1,8 +1,5 @@
 package jp.codic.plugins.intellij;
 
-import com.intellij.notification.Notification;
-import com.intellij.notification.NotificationType;
-import com.intellij.notification.Notifications;
 import com.intellij.openapi.actionSystem.KeyboardShortcut;
 import com.intellij.openapi.actionSystem.Shortcut;
 import com.intellij.openapi.diagnostic.Logger;
@@ -36,7 +33,7 @@ public class QuickLookForm {
     private JTextField queryTextField;
     private JLabel statusLabel;
     private Debouncer debouncer ;
-    private SelectionListener listener;
+    private EventListener listener;
     private CodicPluginProjectComponent component;
     private String activeFileType;
 
@@ -145,7 +142,7 @@ public class QuickLookForm {
         return sb.toString();
     }
 
-    public void setSelectionListener(SelectionListener listener) {
+    public void setSelectionListener(EventListener listener) {
         this.listener = listener;
     }
 
@@ -166,7 +163,7 @@ public class QuickLookForm {
     public void applySelection() {
         String selected = this.getSelected();
         if (selected != null && listener != null) {
-            listener.select(selected);
+            listener.selected(selected);
         }
     }
 
@@ -253,10 +250,7 @@ public class QuickLookForm {
 
             } catch (APIException e) {
                 updateResultList(new Translation[0]);
-                Notifications.Bus.notify(
-                    new Notification("CodicPlugin", "Codic Plugin Error", e.getMessage(), NotificationType.WARNING)
-                );
-
+                listener.failed(e);
             }
         }
     }
@@ -360,8 +354,9 @@ public class QuickLookForm {
     }
 
 
-    public static interface SelectionListener {
-        public void select(String text);
+    public static interface EventListener {
+        public void selected(String text);
+        public void failed(APIException e);
     }
 
 

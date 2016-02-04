@@ -25,6 +25,9 @@ IntelliJ IDEAとそのプラットフォーム製品 (PhpStorm, PyCharm, RubyMin
 ### Change log
 
 
+_1.0.8_
+- APIレートリミットエラーを通知するように修正
+
 _1.0.7_
 - ケース変換選択のショートカットを追加（<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>D</kbd>をリタイプ）
 
@@ -32,13 +35,15 @@ _1.0.6_
 - API v1.1 をサポート.
 - ダイアログ上でのキーハンドリングを強化
 
+<!--
 _1.0.5_
 - バグ修正 #6 : Add vertical scrollbar in quick-look.
 
 _1.0.4_
 - Redesign the quick-look popup.
 - バグ修正 #1 : IME dose not work in the quick-look.
-      
+-->
+
 
 ### Bug report
 
