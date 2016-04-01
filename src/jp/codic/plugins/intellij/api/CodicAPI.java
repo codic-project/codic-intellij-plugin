@@ -70,8 +70,7 @@ public class CodicAPI {
         params.put("project_id", projectId);
         params.put("text", query);
         params.put("casing", letterCase);
-        // params.put("count", 20);
-if (1==1) throw new APIException("test", 429);
+
         try {
             JSONArray json = execHttpGetJsonArray(accessToken, url + "?" + buildQueryString(params));
             Translation[] entries = new Translation[json.length()];
@@ -83,6 +82,8 @@ if (1==1) throw new APIException("test", 429);
                 break;
             }
             return entries;
+        } catch (APIException e) {
+            throw e;
         } catch (Exception e) {
             throw new APIException(e.getMessage());
         }

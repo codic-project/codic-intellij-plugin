@@ -41,9 +41,14 @@ public class QuickLookAction extends AnAction {
             return;
         }
 
+
+        // TODO : リンクの入れ方
+        // http://www.programcreek.com/java-api-examples/index.php?api=com.intellij.notification.Notifications
+        // https://github.com/carymrobbins/intellij-haskforce/blob/master/src/com/haskforce/utils/HaskellToolsNotificationListener.java
+
         if (!isConfigured(editor.getProject())) {
             Notifications.Bus.notify(
-                    new Notification("CodicPlugin", "Codic Plugin Error",
+                    new Notification("CodicPlugin", "Codic Plugin",
                             CodicPlugin.getString("messages.access_token_required"), NotificationType.WARNING)
             );
             return;
@@ -97,7 +102,7 @@ public class QuickLookAction extends AnAction {
                     message = CodicPlugin.getString("messages.api_rate_limit_exceeded");
                 }
                 Notifications.Bus.notify(
-                    new Notification("CodicPlugin", "Codic Plugin Error", message, NotificationType.WARNING),
+                    new Notification("CodicPlugin", "Codic Plugin", message, NotificationType.WARNING),
                     project
                 );
             }

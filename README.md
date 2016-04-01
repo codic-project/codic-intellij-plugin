@@ -25,7 +25,7 @@ IntelliJ IDEAとそのプラットフォーム製品 (PhpStorm, PyCharm, RubyMin
 ### Change log
 
 
-_1.0.8_
+_1.0.10_
 - APIレートリミットエラーを通知するように修正
 
 _1.0.7_

@@ -3,7 +3,7 @@
     <name>Codic Plugin</name>
 
     <!-- ** Also change CodicPlugin#VERSION ** -->
-    <version>1.0.8</version>
+    <version>1.0.10</version>
     <vendor email="team@codic.jp" url="https://github.com/codic-project/codic-intellij-plugin">codic</vendor>
 
     <description><![CDATA[
@@ -12,7 +12,7 @@
     ]]></description>
 
     <change-notes><![CDATA[
-      <strong>1.0.8</strong><br>
+      <strong>1.0.10</strong><br>
       - Fix bug (Rate limit error not notified).<br>
 
       <strong>1.0.7</strong><br>
@@ -50,8 +50,8 @@
        on how to target different products -->
   <depends>com.intellij.modules.lang</depends>
 
+  <!-- Add your extensions here -->
   <extensions defaultExtensionNs="com.intellij">
-    <!-- Add your extensions here -->
   </extensions>
 
   <application-components>
