@@ -24,6 +24,8 @@ IntelliJ IDEAとそのプラットフォーム製品 (PhpStorm, PyCharm, RubyMin
 
 ### Change log
 
+_1.0.11_
+- IntelliJ 2016.1 で設定ダイアログが表示されない問題を修正
 
 _1.0.10_
 - APIレートリミットエラーを通知するように修正
