@@ -3,7 +3,7 @@
     <name>Codic Plugin</name>
 
     <!-- ** Also change CodicPlugin#VERSION ** -->
-    <version>1.0.10</version>
+    <version>1.0.11</version>
     <vendor email="team@codic.jp" url="https://github.com/codic-project/codic-intellij-plugin">codic</vendor>
 
     <description><![CDATA[
@@ -12,6 +12,9 @@
     ]]></description>
 
     <change-notes><![CDATA[
+      <strong>1.0.11</strong><br>
+      - Fix bug #9 : Support 2016.1.<br>
+
       <strong>1.0.10</strong><br>
       - Fix bug (Rate limit error not notified).<br>
 
@@ -52,6 +55,13 @@
 
   <!-- Add your extensions here -->
   <extensions defaultExtensionNs="com.intellij">
+      <!--
+      <projectService serviceInterface="jp.codic.plugins.intellij.CodicPluginProjectComponent"
+                      serviceImplementation="jp.codic.plugins.intellij.CodicPluginProjectComponent"/>
+      -->
+      <projectConfigurable id="CodicPlugin" displayName="Codic Plugin"
+                           instance="jp.codic.plugins.intellij.CodicPluginConfigurable">
+      </projectConfigurable>
   </extensions>
 
   <application-components>

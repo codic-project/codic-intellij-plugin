@@ -1,5 +1,6 @@
 package jp.codic.plugins.intellij;
 
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.PathManager;
 import com.intellij.openapi.components.*;
@@ -11,6 +12,7 @@ import com.intellij.openapi.util.registry.Registry;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import com.intellij.util.xmlb.XmlSerializerUtil;
 
 import javax.swing.*;
 import java.io.File;
@@ -24,25 +26,25 @@ import java.util.Map;
                 scheme = StorageScheme.DIRECTORY_BASED)
 })
 public class CodicPluginProjectComponent implements ProjectComponent,
-        PersistentStateComponent<CodicPluginSettings>, Configurable {
+        PersistentStateComponent<CodicPluginSettings> {
 
     private final Logger LOG = Logger.getInstance("#" + getClass().getCanonicalName());
 
 
     private CodicPluginSettings settings;
-    private PreferenceForm gui;
 
 
     public CodicPluginProjectComponent(Project project) {
-        //Application
     }
 
+    @Override
     public void initComponent() {
         // Pass
     }
 
+    @Override
     public void disposeComponent() {
-        gui = null;
+        //gui = null;
     }
 
     @NotNull
@@ -61,57 +63,7 @@ public class CodicPluginProjectComponent implements ProjectComponent,
 
     @Override
     public void loadState(CodicPluginSettings settings) {
-        this.settings = settings;
-        //this.settings.updateCaseConventionMap();
-        //CodicPluginSettings.applyMaxRecentProjectsToRegistry();
-    }
-
-
-    // Configurable---------------------------------
-    @Nls
-    @Override
-    public String getDisplayName() {
-        return "Codic Plugin";
-    }
-
-    @Nullable
-    public Icon getIcon() {
-        return null;
-    }
-
-    @Nullable
-    @Override
-    public String getHelpTopic() {
-        return null;
-    }
-
-    @Nullable
-    @Override
-    public JComponent createComponent() {
-        if (gui == null) {
-            gui = new PreferenceForm(getState());
-        }
-        return gui.getRoot();
-    }
-
-    @Override
-    public boolean isModified() {
-        return gui.isModified(getState());
-    }
-
-    @Override
-    public void apply() throws ConfigurationException {
-        settings = gui.exportDisplayedSettings();
-    }
-
-    @Override
-    public void reset() {
-        gui.importFrom(settings);
-    }
-
-    @Override
-    public void disposeUIResources() {
-        gui = null;
+        XmlSerializerUtil.copyBean(settings, this.getState());
     }
 
     @Override
@@ -124,4 +76,7 @@ public class CodicPluginProjectComponent implements ProjectComponent,
 
     }
 
+    public static CodicPluginProjectComponent getInstance(Project project) {
+        return project.getComponent(CodicPluginProjectComponent.class);
+    }
 }
