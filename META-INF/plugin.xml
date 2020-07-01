@@ -1,15 +1,18 @@
 <idea-plugin version="2">
     <id>jp.codic.plugins.intellij</id>
-    <name>Codic Plugin (Until 2019.3)</name>
+    <name>Codic Plugin</name>
 
-    <version>1.0.13</version>
+    <version>1.1.0</version>
     <vendor email="team@codic.jp" url="https://github.com/codic-project/codic-intellij-plugin">codic</vendor>
 
     <description><![CDATA[
-        <a href="http://codic.jp" target="_blank">codic</a>のネーミング生成をIntelliJプラットフォーム製品から使えるようにするプラグインです。
+        <a href="http://codic.jp" target="_blank">codic</a>のネーミング生成をIntelliJプラットフォーム製品から使えるようにするプラグインです。<br>
     ]]></description>
 
     <change-notes><![CDATA[
+      <strong>1.1.0</strong><br>
+      - 2020.1に対応
+
       <strong>1.0.12</strong><br>
       - いくつかのバグを修正
       - 下位互換性の為に2020以降とブランチを分離
@@ -49,7 +52,7 @@
   </change-notes>
 
   <!-- please see http://confluence.jetbrains.com/display/IDEADEV/Build+Number+Ranges for description -->
-  <idea-version since-build="133" until-build="193.*"/>
+  <idea-version since-build="201"/>
 
   <!-- please see http://confluence.jetbrains.com/display/IDEADEV/Plugin+Compatibility+with+IntelliJ+Platform+Products
        on how to target different products -->
@@ -84,7 +87,7 @@
 
   <actions>
     <!-- Add your actions here -->
-      <action id="CodicPluginQuickLookAction" class="jp.codic.plugins.intellij.QuickLookAction" text="Codic: Quick look">
+      <action id="CodicPluginQuickLookAction" class="jp.codic.plugins.intellij.QuickLookAction" text="Codic: Quick Look">
           <add-to-group group-id="ToolsMenu" anchor="first"/>
           <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl D"/>
       </action>

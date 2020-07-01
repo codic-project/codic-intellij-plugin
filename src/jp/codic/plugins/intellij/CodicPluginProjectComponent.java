@@ -1,31 +1,18 @@
 package jp.codic.plugins.intellij;
 
-import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.application.Application;
-import com.intellij.openapi.application.PathManager;
-import com.intellij.openapi.components.*;
+import com.intellij.openapi.components.PersistentStateComponent;
+import com.intellij.openapi.components.State;
+import com.intellij.openapi.components.Storage;
 import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.options.Configurable;
-import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.registry.Registry;
-import org.jetbrains.annotations.Nls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import com.intellij.util.xmlb.XmlSerializerUtil;
-
-import javax.swing.*;
-import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
+import org.jetbrains.annotations.NotNull;
 
 
 @State(name = "CodicPluginSettings", storages = {
-        @Storage(id = "default", file = StoragePathMacros.PROJECT_FILE),
-        @Storage(id = "dir", file = StoragePathMacros.PROJECT_CONFIG_DIR + "/CodicPluginSettings.xml",
-                scheme = StorageScheme.DIRECTORY_BASED)
+        @Storage("CodicPluginSettings.xml")
 })
-public class CodicPluginProjectComponent implements ProjectComponent,
+public class CodicPluginProjectComponent implements
         PersistentStateComponent<CodicPluginSettings> {
 
     private final Logger LOG = Logger.getInstance("#" + getClass().getCanonicalName());
@@ -35,16 +22,6 @@ public class CodicPluginProjectComponent implements ProjectComponent,
 
 
     public CodicPluginProjectComponent(Project project) {
-    }
-
-    @Override
-    public void initComponent() {
-        // Pass
-    }
-
-    @Override
-    public void disposeComponent() {
-        //gui = null;
     }
 
     @NotNull
@@ -64,16 +41,6 @@ public class CodicPluginProjectComponent implements ProjectComponent,
     @Override
     public void loadState(CodicPluginSettings settings) {
         XmlSerializerUtil.copyBean(settings, this.getState());
-    }
-
-    @Override
-    public void projectOpened() {
-
-    }
-
-    @Override
-    public void projectClosed() {
-
     }
 
     public static CodicPluginProjectComponent getInstance(Project project) {
