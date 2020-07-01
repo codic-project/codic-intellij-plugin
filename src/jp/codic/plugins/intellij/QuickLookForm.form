@@ -34,7 +34,7 @@
         <properties/>
         <border type="none"/>
         <children>
-          <component id="511bc" class="javax.swing.JTextField" binding="queryTextField" custom-create="true">
+          <component id="511bc" class="javax.swing.JTextField" binding="queryTextField">
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <minimum-size width="200" height="-1"/>

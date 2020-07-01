@@ -36,7 +36,7 @@ public class QuickLookForm {
     private EventListener listener;
     private CodicPluginProjectComponent component;
     private String activeFileType;
-
+    private KeyStroke actionShortcutKey;
 
     /**
      * A constructor.
@@ -45,6 +45,7 @@ public class QuickLookForm {
 
         debouncer = new Debouncer(DELAY_FOR_KEY_EVENT);
         component = project.getComponent(CodicPluginProjectComponent.class);
+        actionShortcutKey = getShortcut();
 
         // Init query text field.
         queryTextField.getDocument().addDocumentListener(new ModifyListener() {
@@ -62,6 +63,16 @@ public class QuickLookForm {
                 }
                 if (keyEvent.getKeyCode() ==  10) {  // Enter
                     applySelection();
+                }
+            }
+            @Override public void keyReleased(KeyEvent keyEvent) {
+                // Note: keyReleasedでないとハンドリングできない、ただしOracleのJDKはkeyPressedでもハンドリングできる
+                // Note: KeyEvent#code, KeyEvent#modifiers は keyStroke と互換性がないので変換している
+                KeyStroke keyStroke = KeyStroke.getKeyStrokeForEvent(keyEvent);
+                if (actionShortcutKey != null && (actionShortcutKey.getKeyCode() == keyStroke.getKeyCode() &&
+                        actionShortcutKey.getModifiers() == keyStroke.getModifiers())) {
+                    keyEvent.consume();
+                    scrollLetterCaseComboBox();
                 }
             }
         });
@@ -117,8 +128,8 @@ public class QuickLookForm {
 //                getShortcut(QUICK_LOOK_ACTION_ID)) + " : Change letter case.");
     }
 
-    private KeyStroke getShortcut(String actionCodeCompletion) {
-        final Shortcut[] shortcuts = KeymapManager.getInstance().getActiveKeymap().getShortcuts(actionCodeCompletion);
+    private KeyStroke getShortcut() {
+        final Shortcut[] shortcuts = KeymapManager.getInstance().getActiveKeymap().getShortcuts(QUICK_LOOK_ACTION_ID);
         for (final Shortcut shortcut : shortcuts) {
             if (shortcut instanceof KeyboardShortcut) {
                 return ((KeyboardShortcut)shortcut).getFirstKeyStroke();
@@ -218,10 +229,6 @@ public class QuickLookForm {
 
     private Font increaseFontSize(Font baseFont, int delta) {
         return new Font(baseFont.getName(), baseFont.getStyle(), baseFont.getSize() + delta);
-    }
-
-    private void createUIComponents() {
-        this.queryTextField = new MyTextField(getShortcut(QUICK_LOOK_ACTION_ID));
     }
 
     private class SearchTask implements Runnable {
@@ -353,35 +360,8 @@ public class QuickLookForm {
         }
     }
 
-
     public static interface EventListener {
         public void selected(String text);
         public void failed(APIException e);
-    }
-
-
-    public class MyTextField extends JTextField {
-
-        private final Logger LOG = Logger.getInstance("#" + getClass().getCanonicalName());
-        private KeyStroke myKeyStroke;
-
-        public MyTextField(KeyStroke keyStroke) {
-            super();
-            myKeyStroke = keyStroke;
-        }
-
-        @Override
-        protected void processKeyEvent(KeyEvent keyEvent) {
-            KeyStroke keyStroke = KeyStroke.getKeyStrokeForEvent(keyEvent);
-
-            if (myKeyStroke != null && (myKeyStroke.getKeyCode() == keyStroke.getKeyCode() &&
-                    myKeyStroke.getModifiers() == keyStroke.getModifiers())) {
-                keyEvent.consume();
-                scrollLetterCaseComboBox();
-                return;
-            }
-
-            super.processKeyEvent(keyEvent);
-        }
     }
 }

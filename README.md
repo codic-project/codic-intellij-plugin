@@ -24,6 +24,10 @@ IntelliJ IDEAとそのプラットフォーム製品 (PhpStorm, PyCharm, RubyMin
 
 ### Change log
 
+_1.0.12_
+- いくつかのバグを修正
+- 下位互換性の為に2020以降とブランチを分離
+
 _1.0.11_
 - IntelliJ 2016.1 で設定ダイアログが表示されない問題を修正
 

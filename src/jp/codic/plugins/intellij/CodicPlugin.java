@@ -1,8 +1,7 @@
 package jp.codic.plugins.intellij;
 
-import com.intellij.openapi.components.ApplicationComponent;
-import com.intellij.openapi.components.ServiceManager;
-import org.jetbrains.annotations.NotNull;
+import com.intellij.ide.plugins.PluginManager;
+import com.intellij.openapi.extensions.PluginId;
 
 import java.text.MessageFormat;
 import java.util.ResourceBundle;
@@ -10,7 +9,7 @@ import java.util.ResourceBundle;
 
 public class CodicPlugin {
 
-    private static final String VERSION = "1.0.11";
+    private static final String PLUGIN_ID = "jp.codic.plugins.intellij";
 
     private static ResourceBundle resource;
 
@@ -28,6 +27,6 @@ public class CodicPlugin {
     }
 
     public static String getVersion() {
-        return VERSION;
+        return PluginManager.getPlugin(PluginId.getId(PLUGIN_ID)).getVersion();
     }
 }

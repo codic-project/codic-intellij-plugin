@@ -135,12 +135,12 @@ public class QuickLookAction extends AnAction {
                 });
 
         final JBPopup popup = builder.createPopup();
-        popup.showInBestPositionFor(editor);
-
         Dimension size = component.getState().quickLookSize();
         if (size != null) {
             popup.setSize(size);
         }
+
+        popup.showInBestPositionFor(editor);
 
         cancelListener = new CancelListener(popup) {
             @Override public void cancel() {
