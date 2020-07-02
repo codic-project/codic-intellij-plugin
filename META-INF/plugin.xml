@@ -2,7 +2,7 @@
     <id>jp.codic.plugins.intellij</id>
     <name>Codic Plugin</name>
 
-    <version>1.0.13</version>
+    <version>1.0.12</version>
     <vendor email="team@codic.jp" url="https://github.com/codic-project/codic-intellij-plugin">codic</vendor>
 
     <description><![CDATA[
