@@ -1,6 +1,6 @@
 <idea-plugin version="2">
     <id>jp.codic.plugins.intellij</id>
-    <name>Codic Plugin (Until 2019.3)</name>
+    <name>Codic Plugin</name>
 
     <version>1.0.13</version>
     <vendor email="team@codic.jp" url="https://github.com/codic-project/codic-intellij-plugin">codic</vendor>
