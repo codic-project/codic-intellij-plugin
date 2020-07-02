@@ -11,11 +11,12 @@
 
     <change-notes><![CDATA[
       <strong>1.1.0</strong><br>
-      - 2020.1に対応
+      - 2020.1に対応<br>
+      - PreferenceカテゴリーをToolsに変更<br>
 
       <strong>1.0.12</strong><br>
-      - いくつかのバグを修正
-      - 下位互換性の為に2020以降とブランチを分離
+      - いくつかのバグを修正<br>
+      - 下位互換性の為に2020以降とブランチを分離<br>
 
       <strong>1.0.11</strong><br>
       - Fix bug #9 : Support 2016.1.<br>
@@ -65,7 +66,8 @@
                       serviceImplementation="jp.codic.plugins.intellij.CodicPluginProjectComponent"/>
       -->
       <projectConfigurable id="CodicPlugin" displayName="Codic Plugin"
-                           instance="jp.codic.plugins.intellij.CodicPluginConfigurable">
+            instance="jp.codic.plugins.intellij.CodicPluginConfigurable"
+            parentId="tools">
       </projectConfigurable>
   </extensions>
 

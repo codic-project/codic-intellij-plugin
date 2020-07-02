@@ -26,6 +26,7 @@ IntelliJ IDEAとそのプラットフォーム製品 (PhpStorm, PyCharm, RubyMin
 
 _1.1.0_
 - 2020.1に対応 (#13)
+- PreferenceカテゴリーをToolsに変更
       
 _1.0.12_
 - いくつかのバグを修正
