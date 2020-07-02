@@ -11,8 +11,8 @@
 
     <change-notes><![CDATA[
       <strong>1.0.12</strong><br>
-      - いくつかのバグを修正
-      - 下位互換性の為に2020以降とブランチを分離
+      - いくつかのバグを修正<br>
+      - 下位互換性の為に2020以降とブランチを分離<br>
 
       <strong>1.0.11</strong><br>
       - Fix bug #9 : Support 2016.1.<br>
