@@ -25,6 +25,7 @@ IntelliJ IDEAとそのプラットフォーム製品 (PhpStorm, PyCharm, RubyMin
 ### Change log
 
 _1.1.0_
+- JetBrains Plugins Repository上でのプラグイン名を変更
 - 2020.1に対応 (#13)
 - PreferenceカテゴリーをToolsに変更
       

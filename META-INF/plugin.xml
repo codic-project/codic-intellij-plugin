@@ -1,31 +1,33 @@
 <idea-plugin version="2">
     <id>jp.codic.plugins.intellij</id>
-    <name>Codic Plugin</name>
+    <name>Codic Support</name>
 
     <version>1.1.0</version>
     <vendor email="team@codic.jp" url="https://github.com/codic-project/codic-intellij-plugin">codic</vendor>
-
+    
     <description><![CDATA[
-        <a href="http://codic.jp" target="_blank">codic</a>のネーミング生成をIntelliJプラットフォーム製品から使えるようにするプラグインです。<br>
+        <a href="http://codic.jp" target="_blank">codic</a> plugin for the IntelliJ platform products<br>
+    This plugin automatically generates (translate Japanese to English) naming using codic API.<br>
     ]]></description>
 
     <change-notes><![CDATA[
       <strong>1.1.0</strong><br>
-      - 2020.1に対応<br>
-      - PreferenceカテゴリーをToolsに変更<br>
+      - Changed plugin name on JetBrains Plugins Repository.<br>
+      - Supported 2020.1.<br>
+      - Changed preference category into "Tools".<br>
 
       <strong>1.0.12</strong><br>
-      - いくつかのバグを修正<br>
-      - 下位互換性の為に2020以降とブランチを分離<br>
+      - Fixed some bugs.<br>
+      - Separated brunches to support older version platforms.<br>
 
       <strong>1.0.11</strong><br>
-      - Fix bug #9 : Support 2016.1.<br>
+      - Fixed bug #9 : Support 2016.1.<br>
 
       <strong>1.0.10</strong><br>
-      - Fix bug (Rate limit error not notified).<br>
+      - Fixed bug (Rate limit error not notified).<br>
 
       <strong>1.0.7</strong><br>
-      - Add shortcut key for letter casing combo-box (Ctrl+Shift+D).<br>
+      - Added shortcut key for letter casing combo-box (Ctrl+Shift+D).<br>
 
       <strong>1.0.6</strong><br>
       - Support v1.1 API.<br>
