@@ -67,7 +67,7 @@
       <projectService serviceInterface="jp.codic.plugins.intellij.CodicPluginProjectComponent"
                       serviceImplementation="jp.codic.plugins.intellij.CodicPluginProjectComponent"/>
       -->
-      <projectConfigurable id="CodicPlugin" displayName="Codic Plugin"
+      <projectConfigurable id="CodicPlugin" displayName="Codic Support"
             instance="jp.codic.plugins.intellij.CodicPluginConfigurable"
             parentId="tools">
       </projectConfigurable>
