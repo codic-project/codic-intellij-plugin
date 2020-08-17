@@ -2,7 +2,7 @@
     <id>jp.codic.plugins.intellij</id>
     <name>Codic Support</name>
 
-    <version>1.1.0</version>
+    <version>1.1.1</version>
     <vendor email="team@codic.jp" url="https://github.com/codic-project/codic-intellij-plugin">codic</vendor>
     
     <description><![CDATA[
@@ -11,6 +11,9 @@
     ]]></description>
 
     <change-notes><![CDATA[
+      <strong>1.1.1</strong><br>
+      - Fixed bug #14.<br>
+
       <strong>1.1.0</strong><br>
       - Changed plugin name on JetBrains Plugins Repository.<br>
       - Supported 2020.1.<br>

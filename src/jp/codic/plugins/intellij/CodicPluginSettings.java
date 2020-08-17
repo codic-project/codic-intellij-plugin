@@ -70,7 +70,9 @@ public class CodicPluginSettings {
             for (String text : letterCaseConvention.split(",")) {
                 if (text.isEmpty() || text.indexOf(":") == -1)
                     continue;
-                String fields[] = text.split(":");
+                String[] fields = text.split(":");
+                if (fields.length <= 1)
+                    continue;
                 letterCaseConventionIndex.put(fields[0], fields[1]);
             }
         }

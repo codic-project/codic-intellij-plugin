@@ -5,11 +5,11 @@ IntelliJ IDEAとそのプラットフォーム製品 (PhpStorm, PyCharm, RubyMin
 
 ### Install
 1. インストールは公式レポジトリからインストールできます。
- メニューの "Preferences" >> "Plugins" から "Codic Plugin" で検索してインストールしてください。
+ メニューの "Preferences" >> "Plugins" から "Codic Support" で検索してインストールしてください。
 
  ![codic plugin](https://raw.githubusercontent.com/codic-project/codic-intellij-plugin/master/img/screenshot2.png)
 
-2. メニューの "Preferences" >> "Codic Plugin" でアクセストークンを設定します。アクセストークンは、
+2. メニューの "Preferences" >> "Codic Support" でアクセストークンを設定します。アクセストークンは、
  [Codic](https://codic.jp)にログイン後、APIステータスのページより取得できます。
  
  ![codic plugin](https://raw.githubusercontent.com/codic-project/codic-intellij-plugin/master/img/screenshot3.png)
